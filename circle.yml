@@ -1,6 +1,6 @@
 machine:
   environment:
-    IMPORT_PATH: "github.com/rafaeljesus/tracing-rest"
+    IMPORT_PATH: "/home/ubuntu/.go_workspace/src/github.com/rafaeljesus/tracing-rest"
   services:
     - docker
 dependencies:
