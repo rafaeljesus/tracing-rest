@@ -6,5 +6,9 @@ import (
 )
 
 func Index(c echo.Context) error {
-  return c.String(http.StatusOK, "Hello, World!")
+  return c.JSON(http.StatusOK, &response{Alive: true})
+}
+
+type response struct {
+  Alive bool `json: "alive"`
 }
