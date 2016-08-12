@@ -1,0 +1,19 @@
+machine:
+  environment:
+    IMPORT_PATH: "github.com/rafaeljesus/tracing-rest"
+  services:
+    - docker
+dependencies:
+  pre:
+    - go get github.com/tools/godep
+  override:
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
+deployment:
+  master:
+    branch: master
+    commands:
+      - docker build -t rafaeljesus/tracing-rest .
+      - docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
+      - docker tag rafaeljesus/tracing-rest rafaeljesus/tracing-rest:master
+      - docker push rafaeljesus/tracing-rest:master
