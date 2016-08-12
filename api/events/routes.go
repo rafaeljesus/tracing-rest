@@ -6,7 +6,9 @@ import (
 )
 
 func Index(c echo.Context) error {
-  return c.JSON(http.StatusOK, &response{Alive: true})
+  name := c.QueryParam("name")
+
+  return c.JSON(http.StatusOK, &event{Name: name})
 }
 
 func Create(c echo.Context) error {
