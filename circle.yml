@@ -1,13 +1,14 @@
 machine:
   environment:
-    IMPORT_PATH: "/home/ubuntu/.go_workspace/src/github.com/rafaeljesus/tracing-rest"
+    IMPORT_PATH: "github.com/rafaeljesus/tracing-rest"
   services:
     - docker
 dependencies:
   pre:
     - go get github.com/tools/godep
-    - go get github.com/labstack/echo
     - go get github.com/dgrijalva/jwt-go
+    - go get github.com/labstack/echo
+    - go get github.com/rafaeljesus/tracing-rest
   override:
     - mkdir -p "$GOPATH/src/$IMPORT_PATH"
     - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
