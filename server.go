@@ -16,7 +16,7 @@ func main() {
   e := echo.New()
   e.Use(middleware.Logger())
 
-  r := e.Group("/api")
+  r := e.Group("/v1")
 
   r.GET("/healthz", healthz.Index)
   r.GET("/events", events.Index)

@@ -5,6 +5,7 @@ import (
   "github.com/labstack/echo"
 
   "github.com/rafaeljesus/tracing-rest/db"
+  "github.com/rafaeljesus/tracing-rest/models"
 )
 
 func Index(c echo.Context) error {
@@ -12,7 +13,7 @@ func Index(c echo.Context) error {
 }
 
 func Create(c echo.Context) error {
-  event := &Event{}
+  event := &models.Event{}
 
   if err := c.Bind(event); err != nil {
     return err
