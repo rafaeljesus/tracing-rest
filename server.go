@@ -6,7 +6,6 @@ import (
   "github.com/labstack/echo/middleware"
 
   "github.com/rafaeljesus/tracing-rest/db"
-
   "github.com/rafaeljesus/tracing-rest/api/healthz"
   "github.com/rafaeljesus/tracing-rest/api/events"
 )
