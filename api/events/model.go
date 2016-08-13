@@ -8,4 +8,5 @@ type Event struct {
   gorm.Model
   Name string
   Status string
+  Payload string `sql: "type:JSONB DEFAULT '{}'::JSONB"`
 }
