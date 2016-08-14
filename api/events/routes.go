@@ -3,13 +3,17 @@ package events
 import (
   "net/http"
   "github.com/labstack/echo"
-
-  "github.com/rafaeljesus/tracing-rest/db"
   "github.com/rafaeljesus/tracing-rest/models"
 )
 
 func Index(c echo.Context) error {
-  return c.JSON(http.StatusOK, &response{Alive: true})
+  Name := c.QueryParam("name")
+  Status := c.QueryParam("status")
+
+  query := models.Query{Name, Status}
+  events := models.Search(query)
+
+  return c.JSON(http.StatusOK, &events)
 }
 
 func Create(c echo.Context) error {
@@ -19,11 +23,7 @@ func Create(c echo.Context) error {
     return err
   }
 
-  db.Repo.Create(&event)
+  event.Save()
 
   return c.JSON(http.StatusOK, &event)
-}
-
-type response struct {
-  Alive bool `json: "alive"`
 }

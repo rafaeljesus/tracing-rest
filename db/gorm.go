@@ -3,8 +3,6 @@ package db
 import (
   "github.com/jinzhu/gorm"
   _ "github.com/jinzhu/gorm/dialects/postgres"
-
-  "github.com/rafaeljesus/tracing-rest/models"
 )
 
 var Repo *gorm.DB
@@ -22,7 +20,6 @@ func Connect() error {
 
   conn.DB().SetMaxIdleConns(10)
   conn.DB().SetMaxOpenConns(100)
-  conn.AutoMigrate(&models.Event{})
 
   Repo = conn
 
