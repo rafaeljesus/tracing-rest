@@ -8,5 +8,5 @@ type Event struct {
   gorm.Model
   Name string
   Status string
-  Payload map[string]interface{} `type: jsonb not null default '{}'::jsonb`
+  Payload PropertyMap `type: jsonb not null default '{}'::jsonb`
 }
