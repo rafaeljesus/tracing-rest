@@ -15,6 +15,9 @@ func main() {
 
   e := echo.New()
   e.Use(middleware.Logger())
+  e.Use(middleware.CORS())
+  e.Use(middleware.Secure())
+  e.Use(middleware.Gzip())
 
   r := e.Group("/v1")
 
