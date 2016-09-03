@@ -7,14 +7,14 @@ import (
 
 type Event struct {
 	gorm.Model
-	Name    string
-	Status  string
-	Payload PropertyMap `type: jsonb not null default '{}'::jsonb`
+	Name    string      `json: "name"`
+	Status  string      `json: "status"`
+	Payload PropertyMap `json: "payload" type:jsonb not null default '{}'::jsonb`
 }
 
 func Search(q Query) interface{} {
 	return db.Repo.
-		Where("name = ?", q.Name).Or("status = ?", q.Status).
+		Where("name = ?", q.Name).
 		Find(&Event{}).
 		Value
 }

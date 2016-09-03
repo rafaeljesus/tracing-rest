@@ -3,7 +3,6 @@ package models
 import (
 	"database/sql/driver"
 	"encoding/json"
-	"errors"
 )
 
 type PropertyMap map[string]interface{}
@@ -14,20 +13,15 @@ func (p PropertyMap) Value() (driver.Value, error) {
 }
 
 func (p *PropertyMap) Scan(src interface{}) error {
-	source, ok := src.([]byte)
-	if !ok {
-		return errors.New("Type assertion .([]byte) failed.")
-	}
+	switch src.(type) {
+	case []byte:
+		source, _ := src.([]byte)
+		var i interface{}
+		if err := json.Unmarshal(source, &i); err != nil {
+			return err
+		}
 
-	var i interface{}
-	if err := json.Unmarshal(source, &i); err != nil {
-		return err
+		*p, _ = i.(map[string]interface{})
 	}
-
-	*p, ok = i.(map[string]interface{})
-	if !ok {
-		return errors.New("Type assertion .(map[string]interface{}) failed.")
-	}
-
 	return nil
 }

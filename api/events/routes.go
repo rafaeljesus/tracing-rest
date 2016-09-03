@@ -9,8 +9,7 @@ import (
 
 func Index(c echo.Context) error {
 	Name := c.QueryParam("name")
-	Status := c.QueryParam("status")
-	query := models.Query{Name, Status}
+	query := models.Query{Name}
 	events := models.Search(query)
 	return c.JSON(http.StatusOK, &events)
 }
