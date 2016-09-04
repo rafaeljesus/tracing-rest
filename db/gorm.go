@@ -8,8 +8,12 @@ import (
 var Repo *gorm.DB
 
 func Connect() error {
-	conn, err := gorm.Open("postgres", "host=localhost dbname=tracing_rest_dev sslmode=disable")
+	cfg, err := dbConfig()
+	if err != nil {
+		panic(err)
+	}
 
+	conn, err := gorm.Open(cfg.drv, cfg.open)
 	if err != nil {
 		panic("failed to connect database")
 	}

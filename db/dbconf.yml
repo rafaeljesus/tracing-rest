@@ -1,0 +1,6 @@
+development:
+  driver: postgres
+  open: dbname=tracing_rest_dev sslmode=disable
+test:
+  driver: postgres
+  open: dbname=tracing_rest_test sslmode=disable
