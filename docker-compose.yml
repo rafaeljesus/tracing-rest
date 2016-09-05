@@ -1,0 +1,21 @@
+version: "2"
+services:
+  api:
+    build: .
+    container_name: tracing_rest
+    command: bin/server
+    ports:
+      - "3000:3000"
+    network_mode: "host"
+    volumes:
+      - .:/go/src/github.com/rafaeljesus/tracing-rest
+    depends_on:
+      - db
+  db:
+    container_name: postgres_dev
+    image: postgres:9.4.2
+    network_mode: "host"
+    ports:
+      - "5432:5432"
+    volumes:
+      - /mnt/sda1/data/postgresql:/var/lib/postgresql/data
