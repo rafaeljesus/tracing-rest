@@ -15,7 +15,7 @@ func Connect() error {
 
 	conn, err := gorm.Open(cfg.drv, cfg.open)
 	if err != nil {
-		panic("failed to connect database")
+		panic(err)
 	}
 
 	if err := conn.DB().Ping(); err != nil {
