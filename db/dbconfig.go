@@ -7,8 +7,7 @@ import (
 )
 
 type config struct {
-	drv  string
-	open string
+	drv, open string
 }
 
 func dbConfig() (*config, error) {
@@ -19,15 +18,8 @@ func dbConfig() (*config, error) {
 		return nil, err
 	}
 
-	drv, err := file.Get(fmt.Sprintf("%s.driver", env))
-	if err != nil {
-		return nil, err
-	}
-
-	open, err := file.Get(fmt.Sprintf("%s.open", env))
-	if err != nil {
-		return nil, err
-	}
+	drv, _ := file.Get(fmt.Sprintf("%s.driver", env))
+	open, _ := file.Get(fmt.Sprintf("%s.open", env))
 
 	drv = os.ExpandEnv(drv)
 	open = os.ExpandEnv(open)
