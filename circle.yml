@@ -7,6 +7,7 @@ machine:
 dependencies:
   pre:
     - go get github.com/tools/godep
+    - go get bitbucket.org/liamstask/goose/cmd/goose
     - go get github.com/rafaeljesus/tracing-rest/api/events
     - go get github.com/rafaeljesus/tracing-rest/api/healthz
     - go get github.com/rafaeljesus/tracing-rest/models
@@ -25,5 +26,7 @@ deployment:
       - docker push rafaeljesus/tracing-rest:master
 
 test:
+  pre:
+    - cd $IMPORT_PATH && go goose up
   override:
     - godep go test ./...
