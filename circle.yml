@@ -1,18 +1,15 @@
 machine:
   environment:
-    IMPORT_PATH: "/home/ubuntu/.go_workspace/src/github.com/rafaeljesus/tracing-rest/"
+    IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
   services:
     - docker
 
 dependencies:
   pre:
-    - go get github.com/labstack/echo/...
-    - go get github.com/jinzhu/gorm/...
-    - go get bitbucket.org/liamstask/goose/cmd/goose/...
+    - go get github.com/tools/godep
   override:
-    - mkdir -p $IMPORT_PATH
-    - rsync -azC --delete ./ $IMPORT_PATH
-    - cd $IMPORT_PATH && go get ./...
+    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
+    - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
 
 deployment:
   master:
@@ -25,7 +22,6 @@ deployment:
 
 test:
   pre:
-    - cd $IMPORT_PATH && go goose up
+    - go vet ./...
   override:
-    - cd $IMPORT_PATH && go vet ./...
-    - cd $IMPORT_PATH && go test ./...
+    - godep go test ./...
