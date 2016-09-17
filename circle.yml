@@ -27,6 +27,6 @@ deployment:
 
 test:
   pre:
-    - cd $IMPORT_PATH && go goose up
+    - cd GOPATH/src/$IMPORT_PATH && go goose up
   override:
     - godep go test ./...
