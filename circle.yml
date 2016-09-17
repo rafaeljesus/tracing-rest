@@ -7,6 +7,10 @@ machine:
 dependencies:
   pre:
     - go get github.com/tools/godep
+    - go get github.com/rafaeljesus/tracing-rest/api/events
+    - go get github.com/rafaeljesus/tracing-rest/api/healthz
+    - go get github.com/rafaeljesus/tracing-rest/models
+    - go get github.com/rafaeljesus/tracing-rest/support
   override:
     - mkdir -p "$GOPATH/src/$IMPORT_PATH"
     - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
