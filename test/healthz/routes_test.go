@@ -13,12 +13,12 @@ import (
 )
 
 const (
-	responseJSON = `{"Alive":true}`
+	responseJSON = `{"alive":true}`
 )
 
 func TestIndex(t *testing.T) {
 	e := echo.New()
-	req, err := http.NewRequest(echo.POST, "/v1/healthz", strings.NewReader(responseJSON))
+	req, err := http.NewRequest(echo.GET, "/v1/healthz", strings.NewReader(responseJSON))
 
 	if assert.NoError(t, err) {
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)

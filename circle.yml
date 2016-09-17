@@ -5,9 +5,8 @@ machine:
     - docker
 dependencies:
   pre:
-    - go get github.com/tools/godep
-    - go get github.com/dgrijalva/jwt-go
-    - go get github.com/labstack/echo
+    - go get github.com/labstack/echo/...
+    - go get github.com/jinzhu/gorm/...
   override:
     - mkdir -p "$GOPATH/src/$IMPORT_PATH"
     - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"

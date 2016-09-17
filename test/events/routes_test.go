@@ -6,19 +6,25 @@ import (
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
-	"strings"
+	"net/url"
 	"testing"
 
 	"github.com/rafaeljesus/tracing-rest/api/events"
+	"github.com/rafaeljesus/tracing-rest/db"
 )
 
-const (
-	responseJSON = `{"Alive":true}`
-)
+func init() {
+	db.Connect()
+}
 
 func TestIndex(t *testing.T) {
+	db.Connect()
 	e := echo.New()
-	req, err := http.NewRequest(echo.POST, "/v1/events", strings.NewReader(responseJSON))
+
+	q := make(url.Values)
+	q.Set("name", "order_created")
+
+	req, err := http.NewRequest(echo.GET, "/v1/events/?"+q.Encode(), nil)
 
 	if assert.NoError(t, err) {
 		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
@@ -27,7 +33,6 @@ func TestIndex(t *testing.T) {
 
 		if assert.NoError(t, events.Index(ctx)) {
 			assert.Equal(t, http.StatusOK, rec.Code)
-			assert.Equal(t, responseJSON, rec.Body.String())
 		}
 	}
 }
