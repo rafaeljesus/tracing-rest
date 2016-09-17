@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/labstack/echo"
-	"github.com/labstack/echo/engine/standard"
+	"github.com/labstack/echo/engine/fasthttp"
 	"github.com/labstack/echo/middleware"
 
 	"github.com/rafaeljesus/tracing-rest/api/events"
@@ -25,5 +25,5 @@ func main() {
 	r.GET("/events", events.Index)
 	r.POST("/events", events.Create)
 
-	e.Run(standard.New(":3000"))
+	e.Run(fasthttp.New(":3000"))
 }

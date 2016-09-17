@@ -7,9 +7,9 @@ import (
 
 type Event struct {
 	gorm.Model
-	Name    string      `json: "name"`
-	Status  string      `json: "status"`
-	Payload PropertyMap `json: "payload" type:jsonb not null default '{}'::jsonb`
+	Name    string      `json:"name"`
+	Status  string      `json:"status"`
+	Payload PropertyMap `json:"payload" type:jsonb not null default '{}'::jsonb`
 }
 
 func Search(q Query) interface{} {

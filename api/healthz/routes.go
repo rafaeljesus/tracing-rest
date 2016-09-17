@@ -10,5 +10,5 @@ func Index(c echo.Context) error {
 }
 
 type response struct {
-	Alive bool `json: "alive"`
+	Alive bool `json:"alive"`
 }
