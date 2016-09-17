@@ -25,7 +25,5 @@ deployment:
       - docker push rafaeljesus/tracing-rest:master
 
 test:
-  pre:
-    - go vet ./...
   override:
     - godep go test ./...
