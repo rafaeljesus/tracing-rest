@@ -1,15 +1,19 @@
 machine:
   environment:
-    IMPORT_PATH: "github.com/rafaeljesus/tracing-rest"
+    IMPORT_PATH: "/home/ubuntu/.go_workspace/src/github.com/rafaeljesus/tracing-rest/"
   services:
     - docker
+
 dependencies:
   pre:
     - go get github.com/labstack/echo/...
     - go get github.com/jinzhu/gorm/...
+    - go get bitbucket.org/liamstask/goose/cmd/goose/...
   override:
-    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
-    - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
+    - mkdir -p $IMPORT_PATH
+    - rsync -azC --delete ./ $IMPORT_PATH
+    - cd $IMPORT_PATH && go get ./...
+
 deployment:
   master:
     branch: master
@@ -18,3 +22,10 @@ deployment:
       - docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
       - docker tag rafaeljesus/tracing-rest rafaeljesus/tracing-rest:master
       - docker push rafaeljesus/tracing-rest:master
+
+test:
+  pre:
+    - cd $IMPORT_PATH && go goose up
+  override:
+    - cd $IMPORT_PATH && go vet ./...
+    - cd $IMPORT_PATH && go test ./...
