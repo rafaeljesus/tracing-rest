@@ -3,13 +3,13 @@ package db
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/rafaeljesus/tracing-rest/support"
+	"os"
 )
 
 var Repo *gorm.DB
 
 func Connect() error {
-	conn, err := gorm.Open("postgres", support.Config["TRACKING_REST_DB"])
+	conn, err := gorm.Open("postgres", os.Getenv("TRACKING_REST_DB"))
 	if err != nil {
 		panic(err)
 	}

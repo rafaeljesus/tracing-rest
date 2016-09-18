@@ -4,6 +4,18 @@
 * A minimal docker alpine container
 * Automatically pushes it to dockerhub if tests pass
 
+## Setup
+- Run Migrations
+```bash
+goose up
+```
+
+- Env vars
+```bash
+export TRACKING_REST_DB=dbname=tracing_rest_dev sslmode=disable
+export TRACKING_REST_PORT=3000
+```
+
 ## Docker
 This repository has automated image builds on hub.docker.com after successfully building and testing. See the `deployment` section of [circle.yml](circle.yml) for details on how this is done. Note that three environment variables need to be set on CircleCI for the deployment to work:
 

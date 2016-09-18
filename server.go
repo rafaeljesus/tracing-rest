@@ -8,7 +8,7 @@ import (
 	"github.com/rafaeljesus/tracing-rest/api/events"
 	"github.com/rafaeljesus/tracing-rest/api/healthz"
 	"github.com/rafaeljesus/tracing-rest/db"
-	"github.com/rafaeljesus/tracing-rest/support"
+	"os"
 )
 
 func main() {
@@ -26,5 +26,5 @@ func main() {
 	r.GET("/events", events.Index)
 	r.POST("/events", events.Create)
 
-	e.Run(fasthttp.New(":" + support.Config["TRACKING_REST_PORT"]))
+	e.Run(fasthttp.New(":" + os.Getenv("TRACKING_REST_PORT")))
 }
