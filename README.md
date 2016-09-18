@@ -38,6 +38,7 @@ $ docker run -it -t -p 3000:3000 --name tracing-rest rafaeljesus/tracing-rest
 ## Badges
 
 [![CircleCI](https://circleci.com/gh/rafaeljesus/tracing-rest.svg?style=svg)](https://circleci.com/gh/rafaeljesus/tracing-rest)
+[![](https://badge.imagelayers.io/rafaeljesus/tracing-rest:latest.svg)](https://imagelayers.io/?images=rafaeljesus/tracing-rest:latest 'Get your own badge on imagelayers.io')
 
 ---
 
