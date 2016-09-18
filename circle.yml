@@ -5,7 +5,7 @@ machine:
 database:
   override:
     - go get bitbucket.org/liamstask/goose/cmd/goose
-    - goose up
+    - goose -env ci up
 
 deployment:
   master:
