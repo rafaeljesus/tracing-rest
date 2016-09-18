@@ -24,6 +24,7 @@ This repository has automated image builds on hub.docker.com after successfully 
   * DOCKER_PASS - Docker Hub password (these are all stored encrypted on CircleCI, and you can create a deployment user with limited permission on Docker Hub if you like)
 
 ```bash
+$ sh buid-container
 $ docker run -it -t -p 3000:3000 --name tracing-rest rafaeljesus/tracing-rest
 ```
 
