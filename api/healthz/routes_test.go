@@ -8,8 +8,6 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
-
-	"github.com/rafaeljesus/tracing-rest/api/healthz"
 )
 
 const (
@@ -25,7 +23,7 @@ func TestIndex(t *testing.T) {
 		rec := httptest.NewRecorder()
 		ctx := e.NewContext(standard.NewRequest(req, e.Logger()), standard.NewResponse(rec, e.Logger()))
 
-		if assert.NoError(t, healthz.Index(ctx)) {
+		if assert.NoError(t, Index(ctx)) {
 			assert.Equal(t, http.StatusOK, rec.Code)
 			assert.Equal(t, responseJSON, rec.Body.String())
 		}
