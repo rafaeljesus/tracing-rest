@@ -5,12 +5,12 @@
 * Automatically pushes it to dockerhub if tests pass
 
 ## Setup
-- Run Migrations
+Run Migrations
 ```bash
 goose up
 ```
 
-- Env vars
+Env vars
 ```bash
 export TRACKING_REST_DB=dbname=tracing_rest_dev sslmode=disable
 export TRACKING_REST_PORT=3000
