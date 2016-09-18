@@ -4,6 +4,9 @@ import (
 	"database/sql"
 )
 
+func main() {
+}
+
 func Up_20160918155111(txn *sql.Tx) {
 	_, err := txn.Exec(
 		"create table events (" +
