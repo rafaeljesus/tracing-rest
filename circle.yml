@@ -1,8 +1,4 @@
 machine:
-  environment:
-    GOROOT: ""
-    PATH: "/usr/local/go/bin:/usr/local/go_workspace/bin:~/.go_workspace/bin:${PATH}"
-    GOPATH: "~/.go_workspace:/usr/local/go_workspace:${HOME}/.go_project"
   services:
     - docker
 
