@@ -1,19 +1,15 @@
 machine:
   environment:
-    IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
+    GOROOT: ""
+    PATH: "/usr/local/go/bin:/usr/local/go_workspace/bin:~/.go_workspace/bin:${PATH}"
+    GOPATH: "~/.go_workspace:/usr/local/go_workspace:${HOME}/.go_project"
   services:
     - docker
 
-dependencies:
-  pre:
-    - go get github.com/tools/godep
-    - go get github.com/rafaeljesus/tracing-rest/api/events
-    - go get github.com/rafaeljesus/tracing-rest/api/healthz
-    - go get github.com/rafaeljesus/tracing-rest/models
-    - go get github.com/rafaeljesus/tracing-rest/support
+database:
   override:
-    - mkdir -p "$GOPATH/src/$IMPORT_PATH"
-    - rsync -azC --delete ./ "$GOPATH/src/$IMPORT_PATH/"
+    - go get bitbucket.org/liamstask/goose/cmd/goose
+    - goose up
 
 deployment:
   master:
@@ -23,10 +19,3 @@ deployment:
       - docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
       - docker tag rafaeljesus/tracing-rest rafaeljesus/tracing-rest:master
       - docker push rafaeljesus/tracing-rest:master
-
-test:
-  pre:
-    - go get bitbucket.org/liamstask/goose/cmd/goose
-    - go goose up
-  override:
-    - godep go test ./...
