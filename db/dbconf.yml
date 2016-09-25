@@ -1,6 +1,6 @@
 development:
   driver: postgres
-  open: dbname=tracing_rest_dev sslmode=disable
+  open: 'postgres://postgres:@docker/tracing_rest_dev?sslmode=enable'
 
 test:
   driver: postgres

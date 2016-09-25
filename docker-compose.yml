@@ -1,6 +1,9 @@
 version: "2"
 services:
   api:
+    environment:
+      - TRACKING_REST_DB="dbname=tracing_rest_dev user=postgres sslmode=disable"
+      - TRACKING_REST_PORT="3000"
     build: .
     container_name: tracing_rest
     command: tracing-rest
@@ -16,4 +19,4 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /mnt/sda1/data/postgresql:/var/lib/postgresql/data
+      - /Users/rafaeljesus/mnt/sda1/data/postgresql:/var/lib/postgresql/data
